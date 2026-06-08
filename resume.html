@@ -165,15 +165,19 @@ h1 span {
   text-decoration: none;
   font-weight: 750;
   font-size: 14px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .button.primary {
   border-color: rgba(249,115,22,0.55);
   background: linear-gradient(135deg, rgba(249,115,22,0.26), rgba(251,191,36,0.12));
+  box-shadow: 0 6px 22px -8px rgba(249,115,22,0.55);
 }
 .button:hover,
 .button:focus-visible {
   border-color: var(--orange-bright);
   outline: none;
+  box-shadow: 0 10px 28px -7px rgba(251,146,60,0.6);
+  transform: translateY(-1px);
 }
 
 .summary-panel {
@@ -589,7 +593,7 @@ details[open] .summary-plus { transform: rotate(45deg); }
           <div class="fact"><b>Best fit</b><span>Senior IC or tech-lead roles at the intersection of technical writing, developer experience, AI documentation engineering, and content systems architecture.</span></div>
           <div class="fact"><b>Core strength</b><span>Turning documentation from prose output into structured infrastructure: APIs, schemas, knowledge graphs, quality gates, and reusable workflows.</span></div>
           <div class="fact"><b>Recent AI work</b><span>AI-assisted authoring pipelines, content validation, GenAI documentation support, retrieval evaluation, and behavioral compliance architecture.</span></div>
-          <div class="fact"><b>Education</b><span>BA, Writing and Linguistics, Georgia Southern University, 2010-2014.</span></div>
+          <div class="fact"><b>Education</b><span>BA, Writing and Linguistics, Georgia Southern University.</span></div>
         </div>
       </aside>
     </div>
@@ -646,6 +650,7 @@ details[open] .summary-plus { transform: rotate(45deg); }
               <li><strong>Authored a 5-page NPC framework guide</strong> after verifying 45+ API surfaces, correcting technical issues, and surfacing undocumented API gaps for follow-up.</li>
               <li><strong>Led contingent writers through GA and feature workstreams</strong>, including scoping, onboarding, review, and parallel delivery coordination.</li>
             </ul>
+            <p style="margin-top:14px;"><a href="https://developers.meta.com/horizon-worlds/learn/" style="color:var(--orange-bright);text-decoration:none;font-weight:600;font-size:14px;">View the Horizon Worlds creator docs</a></p>
           </div>
         </article>
 
@@ -665,6 +670,7 @@ details[open] .summary-plus { transform: rotate(45deg); }
               <li><strong>Designed a diff-tagging system</strong> that routed diff authors to AI authoring assistance based on diff size and integrated AI assistance into review workflows.</li>
               <li><strong>Won second place at an internal hackathon</strong> for an early LLM-assisted documentation authoring workflow.</li>
             </ul>
+            <p style="margin-top:14px;"><a href="https://developers.meta.com/horizon/" style="color:var(--orange-bright);text-decoration:none;font-weight:600;font-size:14px;">View the Meta Horizon OS developer docs</a></p>
           </div>
         </article>
       </div>
@@ -786,7 +792,6 @@ details[open] .summary-plus { transform: rotate(45deg); }
               <p>Created release notes, user guides, classroom materials, L&D coursework, RoboHelp documentation, Confluence migration support, and a one-week software workshop for a user conference.</p>
             </div>
             <div class="earlier-role">
-              <div class="date">2010 - 2014</div>
               <h3>Georgia Southern University</h3>
               <p>Bachelor of Arts in Writing and Linguistics.</p>
             </div>
