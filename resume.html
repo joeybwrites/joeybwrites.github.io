@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joey Blackwell II - Resume</title>
+<meta name="description" content="Web resume for Joey Blackwell II: technical writing, AI documentation engineering, developer documentation systems, and content architecture.">
+<meta name="author" content="Joey Blackwell II">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0d;
+  --surface: #15151a;
+  --surface-2: #1d1d24;
+  --surface-3: #25252d;
+  --border: #2e2e36;
+  --border-strong: #454550;
+  --text: #e8e8ec;
+  --text-muted: #9c9cac;
+  --text-dim: #686878;
+  --orange: #f97316;
+  --orange-bright: #fb923c;
+  --amber: #fbbf24;
+  --coral: #fb7185;
+  --teal: #2dd4bf;
+  --cyan: #22d3ee;
+  --blue: #7dd3fc;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Inter Tight", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(249,115,22,0.09), transparent 420px),
+    radial-gradient(ellipse at 82% 10%, rgba(45,212,191,0.08), transparent 380px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(10,10,13,0.9);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+}
+.topnav .wrap {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 24px;
+  white-space: nowrap;
+}
+.brand i { color: var(--orange-bright); font-style: italic; }
+.navlinks {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.navlinks a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 650;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+.navlinks a:hover,
+.navlinks a:focus-visible,
+.navlinks a.active {
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+}
+
+.hero {
+  padding: 82px 0 46px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.85fr);
+  gap: 48px;
+  align-items: start;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 14px rgba(45,212,191,0.72);
+}
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(46px, 7vw, 84px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.96;
+}
+h1 span {
+  color: var(--orange-bright);
+  font-style: italic;
+}
+.titleline {
+  margin: 20px 0 0;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 650;
+}
+.lede {
+  max-width: 780px;
+  margin: 16px 0 0;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.66;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 7px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 750;
+  font-size: 14px;
+}
+.button.primary {
+  border-color: rgba(249,115,22,0.55);
+  background: linear-gradient(135deg, rgba(249,115,22,0.26), rgba(251,191,36,0.12));
+}
+.button:hover,
+.button:focus-visible {
+  border-color: var(--orange-bright);
+  outline: none;
+}
+
+.summary-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--surface), rgba(28,28,34,0.82));
+  padding: 22px;
+}
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.panel-label {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.status {
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.fact-list {
+  display: grid;
+  gap: 10px;
+}
+.fact {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 13px;
+}
+.fact b {
+  display: block;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.fact span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.metrics {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border);
+}
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 18px 16px;
+}
+.metric-value {
+  font-family: var(--font-display);
+  color: var(--orange-bright);
+  font-size: 34px;
+  line-height: 1;
+}
+.metric-label {
+  margin-top: 9px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-kicker {
+  margin-bottom: 12px;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 52px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.section-intro {
+  max-width: 780px;
+  margin: 0 0 28px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.experience {
+  display: grid;
+  gap: 18px;
+}
+.role {
+  display: grid;
+  grid-template-columns: 220px minmax(0,1fr);
+  gap: 26px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 24px;
+}
+.role-side {
+  border-right: 1px solid var(--border);
+  padding-right: 24px;
+}
+.role-time {
+  color: var(--orange-bright);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.role-company {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+}
+.role-title {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.role-body h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.08;
+}
+.role-body p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+}
+.bullets {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+}
+.bullets li {
+  margin: 8px 0;
+  padding-left: 4px;
+}
+.bullets strong { color: var(--text); font-weight: 700; }
+
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.system-card {
+  min-height: 255px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 22px;
+  position: relative;
+}
+.system-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background: var(--card-color);
+}
+.system-card:nth-child(1) { --card-color: var(--orange-bright); }
+.system-card:nth-child(2) { --card-color: var(--teal); }
+.system-card:nth-child(3) { --card-color: var(--cyan); }
+.system-card:nth-child(4) { --card-color: var(--amber); }
+.system-card:nth-child(5) { --card-color: var(--coral); }
+.system-card:nth-child(6) { --card-color: var(--blue); }
+.card-label {
+  color: var(--card-color);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.system-card h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.08;
+  font-weight: 400;
+}
+.system-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.skill-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 20px;
+}
+.skill-box h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 400;
+}
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+.details-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+}
+details summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+details summary::-webkit-details-marker { display: none; }
+.summary-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.05;
+}
+.summary-meta {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.summary-plus {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--orange-bright);
+  font-size: 26px;
+  line-height: 1;
+}
+details[open] .summary-plus { transform: rotate(45deg); }
+.earlier-content {
+  border-top: 1px solid var(--border);
+  padding: 24px;
+}
+.earlier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.earlier-role {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  padding: 18px;
+}
+.earlier-role h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+.earlier-role .date {
+  color: var(--orange-bright);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.earlier-role p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.footer {
+  padding: 36px 0 54px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer a { color: var(--text-muted); text-decoration: none; }
+.footer a:hover { color: var(--orange-bright); }
+
+@media (max-width: 920px) {
+  .hero-grid,
+  .skills-layout {
+    grid-template-columns: 1fr;
+  }
+  .metric-grid,
+  .system-grid,
+  .earlier-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .role {
+    grid-template-columns: 1fr;
+  }
+  .role-side {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding-right: 0;
+    padding-bottom: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topnav .wrap {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .navlinks { justify-content: flex-start; }
+  .hero { padding-top: 54px; }
+  .metric-grid,
+  .system-grid,
+  .earlier-grid {
+    grid-template-columns: 1fr;
+  }
+  .wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  details summary {
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="wrap">
+      <div class="brand">Joey <i>Blackwell II</i></div>
+      <div class="navlinks" aria-label="Primary navigation">
+        <a href="./index.html">Portfolio</a>
+        <a class="active" href="./resume.html">Resume</a>
+        <a href="#meta">Meta</a>
+        <a href="#systems">Systems</a>
+        <a href="#earlier">Earlier</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Technical writing / AI documentation engineering / systems architecture</div>
+        <h1>Joey Blackwell II builds <span>documentation systems</span>.</h1>
+        <p class="titleline">Documentation Engineer with 10+ years across API/SDK docs, developer platforms, AI-assisted authoring, content quality, and agent-readable documentation architecture.</p>
+        <p class="lede">Most recently at Meta, I built developer documentation and AI-assisted authoring infrastructure across VR/AR platforms, then moved into Content AI work spanning knowledge graphs, procedural diagrams, LLM quality systems, developer-chatbot validation, and retrieval-evaluation research.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#meta">Read Meta experience</a>
+          <a class="button" href="./index.html">View portfolio page</a>
+        </div>
+      </div>
+      <aside class="summary-panel" aria-label="Resume summary">
+        <div class="panel-head">
+          <div class="panel-label">Profile</div>
+          <div class="status">general</div>
+        </div>
+        <div class="fact-list">
+          <div class="fact"><b>Best fit</b><span>Senior IC or tech-lead roles at the intersection of technical writing, developer experience, AI documentation engineering, and content systems architecture.</span></div>
+          <div class="fact"><b>Core strength</b><span>Turning documentation from prose output into structured infrastructure: APIs, schemas, knowledge graphs, quality gates, and reusable workflows.</span></div>
+          <div class="fact"><b>Recent AI work</b><span>AI-assisted authoring pipelines, content validation, GenAI documentation support, retrieval evaluation, and behavioral compliance architecture.</span></div>
+          <div class="fact"><b>Education</b><span>BA, Writing and Linguistics, Georgia Southern University, 2010-2014.</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <div class="metrics">
+    <div class="wrap metric-grid">
+      <div class="metric"><div class="metric-value">10+</div><div class="metric-label">Years tech writing</div></div>
+      <div class="metric"><div class="metric-value">100%</div><div class="metric-label">Platform SDK API coverage</div></div>
+      <div class="metric"><div class="metric-value">38</div><div class="metric-label">Weekly Horizon releases</div></div>
+      <div class="metric"><div class="metric-value">200+</div><div class="metric-label">Engineer-authored diffs</div></div>
+      <div class="metric"><div class="metric-value">300+</div><div class="metric-label">Graph nodes validated</div></div>
+    </div>
+  </div>
+
+  <section id="meta">
+    <div class="wrap">
+      <div class="section-kicker">Experience / Meta</div>
+      <h2>Four years moving from developer docs into AI content infrastructure.</h2>
+      <p class="section-intro">The Meta arc is the main story: Platform SDK foundations, Horizon creator documentation leadership, then Content AI systems that made documentation more structured, measurable, and useful to AI-powered experiences.</p>
+
+      <div class="experience">
+        <article class="role">
+          <div class="role-side">
+            <div class="role-time">2026</div>
+            <div class="role-company">Meta</div>
+            <div class="role-title">Content AI, Reality Labs</div>
+          </div>
+          <div class="role-body">
+            <h3>AI-assisted authoring, quality measurement, knowledge graphs, procedural content.</h3>
+            <p>Co-led Content AI work across authoring pipelines, content quality systems, documentation knowledge graphs, and procedural content infrastructure for developer platforms.</p>
+            <ul class="bullets">
+              <li><strong>Designed an engine-agnostic interactive diagram system</strong> spanning Python extraction, SVG rendering, a custom CMS schema, React/Flow rendering, codegen, accessibility validation, and graph-ready and search-ready JSON intermediates.</li>
+              <li><strong>Contributed to developer-chatbot content validation and evaluation coverage</strong>, including documentation-gap evaluation and integration with the procedural diagram work.</li>
+              <li><strong>Co-authored a NeurIPS 2026 submission, under review</strong>, on retrieval-evaluation methodology for LLM tool selection, bridging information-theoretic measurement to dynamic retrieval-depth policy.</li>
+              <li><strong>Co-developed a PRD-to-doc authoring workflow</strong> that reduced draft creation by 1-2 working days and supported two major launches across five engineering teams.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-side">
+            <div class="role-time">2025</div>
+            <div class="role-company">Meta</div>
+            <div class="role-title">Horizon Creator Docs Lead</div>
+          </div>
+          <div class="role-body">
+            <h3>Creator documentation, release process, GenAI docs, knowledge graph validation.</h3>
+            <p>Owned creator-facing documentation across a fast-moving Horizon release surface, balancing production docs, launch support, release-note systems, and AI product integration.</p>
+            <ul class="bullets">
+              <li><strong>Led documentation for 38 weekly editor releases</strong> across the Horizon creator surface.</li>
+              <li><strong>Authored 100+ diffs for critical Horizon features</strong>, including NPC and GenAI tooling, creator workflows, conversion guides, and mobile-economy systems, plus 42+ targeted tutorial updates.</li>
+              <li><strong>Validated a 300+ node documentation knowledge subgraph</strong> for a Horizon GenAI assistant, aligning learning objectives, documentation, and user-query coverage.</li>
+              <li><strong>Authored a 5-page NPC framework guide</strong> after verifying 45+ API surfaces, correcting technical issues, and surfacing undocumented API gaps for follow-up.</li>
+              <li><strong>Led contingent writers through GA and feature workstreams</strong>, including scoping, onboarding, review, and parallel delivery coordination.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-side">
+            <div class="role-time">2022-2024</div>
+            <div class="role-company">Meta</div>
+            <div class="role-title">Platform SDK Documentation</div>
+          </div>
+          <div class="role-body">
+            <h3>Platform SDK docs, API references, contribution workflows, AI authoring.</h3>
+            <p>Built the foundation across Meta Quest developer documentation: SDK docs, release support, API reference standards, information architecture, and engineer enablement.</p>
+            <ul class="bullets">
+              <li><strong>Owned Platform SDK documentation updates for Meta Connect 2024</strong>, coordinating content updates, learning objectives, information architecture, and API reference work.</li>
+              <li><strong>Drove 100% completion of Platform SDK API references</strong> across Unity, Unreal, and Native by establishing a gold-standard template and structured update workflow.</li>
+              <li><strong>Created contribution workflows</strong> that enabled 200+ engineer-authored documentation diffs.</li>
+              <li><strong>Designed a diff-tagging system</strong> that routed diff authors to AI authoring assistance based on diff size and integrated AI assistance into review workflows.</li>
+              <li><strong>Won second place at an internal hackathon</strong> for an early LLM-assisted documentation authoring workflow.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="systems">
+    <div class="wrap">
+      <div class="section-kicker">Systems / Selected work</div>
+      <h2>The work sits between docs, tooling, and AI systems.</h2>
+      <p class="section-intro">These are the recurring surfaces that matter for senior technical writing and AI documentation engineering roles.</p>
+      <div class="system-grid">
+        <div class="system-card">
+          <div class="card-label">AI docs infrastructure</div>
+          <h3>Agent-readable content</h3>
+          <p>Built documentation structures that can feed knowledge graphs, AI search, assistant validation, and retrieval evaluation, not just human browsing.</p>
+        </div>
+        <div class="system-card">
+          <div class="card-label">Developer docs</div>
+          <h3>SDK and API depth</h3>
+          <p>Worked across Unity, Unreal, Native Android, Spatial SDK, Horizon, Platform SDK, API references, tutorials, release notes, and creator docs.</p>
+        </div>
+        <div class="system-card">
+          <div class="card-label">Evaluation</div>
+          <h3>Quality and retrieval</h3>
+          <p>Used content-quality rubrics, graph validation, LLM-as-judge methods, retrieval evaluation, and developer-chatbot eval coverage to make docs measurable.</p>
+        </div>
+        <div class="system-card">
+          <div class="card-label">Authoring systems</div>
+          <h3>AI-assisted workflows</h3>
+          <p>Designed authoring support from PRDs, diff routing, reusable templates, structured review loops, and content pipelines for engineers and writers.</p>
+        </div>
+        <div class="system-card">
+          <div class="card-label">Architecture</div>
+          <h3>Behavioral compliance</h3>
+          <p>Designed Pantheon, a personal AI-assistant framework using classic systems patterns to preserve identity, state, and instruction compliance across long sessions.</p>
+        </div>
+        <div class="system-card">
+          <div class="card-label">Enablement</div>
+          <h3>People and process</h3>
+          <p>Built workflows others could use: engineer-authored docs, release-note systems, writer onboarding, training materials, and cross-functional handoffs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-kicker">Skills</div>
+      <h2>Technical writing, systems thinking, and AI evaluation in one surface.</h2>
+      <div class="skills-layout">
+        <div class="skill-box">
+          <h3>Programming and web</h3>
+          <div class="pill-row">
+            <span class="pill">Python</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">PHP/Hack</span><span class="pill">React/Flow</span><span class="pill">SQL</span><span class="pill">Bash</span><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">SVG</span><span class="pill">LaTeX</span>
+          </div>
+        </div>
+        <div class="skill-box">
+          <h3>AI systems</h3>
+          <div class="pill-row">
+            <span class="pill">AI-assisted authoring</span><span class="pill">LLM evaluation</span><span class="pill">Retrieval evaluation</span><span class="pill">LLM-as-judge</span><span class="pill">Prompt engineering</span><span class="pill">Multi-agent systems</span><span class="pill">Identity persistence</span><span class="pill">Behavioral compliance</span>
+          </div>
+        </div>
+        <div class="skill-box">
+          <h3>Documentation engineering</h3>
+          <div class="pill-row">
+            <span class="pill">Developer docs</span><span class="pill">API docs</span><span class="pill">SDK docs</span><span class="pill">Information architecture</span><span class="pill">Diataxis</span><span class="pill">CMS schema design</span><span class="pill">Quality rubrics</span><span class="pill">Docs-as-code</span><span class="pill">Release notes</span>
+          </div>
+        </div>
+        <div class="skill-box">
+          <h3>Tools and platforms</h3>
+          <div class="pill-row">
+            <span class="pill">Markdown</span><span class="pill">XML</span><span class="pill">Paligo</span><span class="pill">Oxygen XML</span><span class="pill">MadCap Flare</span><span class="pill">RoboHelp</span><span class="pill">Confluence</span><span class="pill">Zendesk KB</span><span class="pill">Jira</span><span class="pill">Unity SDK</span><span class="pill">Unreal</span><span class="pill">OpenXR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="earlier">
+    <div class="wrap">
+      <div class="section-kicker">Earlier experience</div>
+      <h2>Pre-Meta technical writing history, available on demand.</h2>
+      <p class="section-intro">This section is intentionally expandable: it proves the 10+ year technical-writing timeline without pulling focus from the post-Meta AI documentation engineering story.</p>
+
+      <details class="details-card">
+        <summary>
+          <div>
+            <div class="summary-title">2015-2022 enterprise technical writing</div>
+            <div class="summary-meta">API/SDK docs, Help, training, XML/CCMS, release notes, regulated docs</div>
+          </div>
+          <div class="summary-plus">+</div>
+        </summary>
+        <div class="earlier-content">
+          <div class="earlier-grid">
+            <div class="earlier-role">
+              <div class="date">Aug 2021 - 2022</div>
+              <h3>Deposco - Technical Writer</h3>
+              <p>Produced release notes and Help site updates for Bright Suite products with product owners, QA, and sales; updated stale processes for modern customer use cases and supported internationalization efforts.</p>
+            </div>
+            <div class="earlier-role">
+              <div class="date">Nov 2017 - Jul 2021</div>
+              <h3>Ionic Data Security - Technical Writer</h3>
+              <p>Collaborated with PMs, stakeholders, and engineers on user guides, release notes, API documents, SDK documentation, training guides, Zendesk KB updates, and training video roadmaps.</p>
+            </div>
+            <div class="earlier-role">
+              <div class="date">Aug 2017 - Oct 2017</div>
+              <h3>Mitsubishi Electric - Technical Writer</h3>
+              <p>Produced HVAC technical documentation, submittal forms, manuals, and marketing materials; used Paligo and Oxygen XML for XML-based component content publishing.</p>
+            </div>
+            <div class="earlier-role">
+              <div class="date">Feb 2017 - May 2017</div>
+              <h3>SunTrust - Contract Technical Writer</h3>
+              <p>Produced systems documentation for the SunTrust Online Support framework, including reference guides, release notes, and user manuals; worked with Compliance, Legal, and Operations Risk.</p>
+            </div>
+            <div class="earlier-role">
+              <div class="date">Mar 2015 - Oct 2016</div>
+              <h3>SEDC - Jr. Technical Writer</h3>
+              <p>Created release notes, user guides, classroom materials, L&D coursework, RoboHelp documentation, Confluence migration support, and a one-week software workshop for a user conference.</p>
+            </div>
+            <div class="earlier-role">
+              <div class="date">2010 - 2014</div>
+              <h3>Georgia Southern University</h3>
+              <p>Bachelor of Arts in Writing and Linguistics.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="section-kicker">Publications and talks</div>
+      <h2>Research-adjacent writing, internal talks, and AI documentation practice.</h2>
+      <div class="experience">
+        <article class="role">
+          <div class="role-side">
+            <div class="role-time">2026</div>
+            <div class="role-company">NeurIPS</div>
+            <div class="role-title">Under review</div>
+          </div>
+          <div class="role-body">
+            <h3>Retrieval evaluation for LLM tool selection.</h3>
+            <p>Co-author on a NeurIPS 2026 submission on information-theoretic retrieval evaluation, with contributions to related-work verification, methodology framing, and prose and tone.</p>
+          </div>
+        </article>
+        <article class="role">
+          <div class="role-side">
+            <div class="role-time">2024</div>
+            <div class="role-company">Meta</div>
+            <div class="role-title">Internal talks</div>
+          </div>
+          <div class="role-body">
+            <h3>AI-assisted authoring and documentation workflow acceleration.</h3>
+            <p>Speaker at internal documentation and AI sessions, covering AI-assisted authoring, prompt engineering, and workflow acceleration in documentation.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>Joey Blackwell II. Atlanta, Georgia.</div>
+      <div><a href="./index.html">Portfolio</a> / <a href="mailto:joeyblackwell005@gmail.com">Email</a></div>
+    </div>
+  </footer>
+</body>
+</html>
