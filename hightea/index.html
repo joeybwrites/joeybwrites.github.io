@@ -129,9 +129,8 @@
     if(scanner){ return; }
     if(!audio){ try{ audio=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
     scanner=new Html5Qrcode("reader");
-    var cfg={fps:10, qrbox:{width:300,height:210},
-      formatsToSupport:[Html5QrcodeSupportedFormats.QR_CODE,
-                        Html5QrcodeSupportedFormats.CODE_128]};
+    var cfg={fps:10, qrbox:{width:260,height:260},
+      formatsToSupport:[Html5QrcodeSupportedFormats.QR_CODE]};
     scanner.start({facingMode:"environment"}, cfg, onScan, function(){})
       .then(function(){ flash("","Scanning - aim at the QR square"); })
       .catch(function(err){
