@@ -36,6 +36,8 @@
   button.danger{color:var(--red)}
   .small{font-size:14px;padding:11px 0}
   .controls{display:flex;gap:10px;margin-top:10px}
+  .dbg{color:var(--muted);font-size:12px;text-align:center;min-height:15px;
+    margin:-4px 0 6px;word-break:break-all}
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:10px;line-height:1.4}
 </style>
 </head>
@@ -52,6 +54,7 @@
 
   <div id="reader"></div>
   <div class="flash" id="flash">Tap Start Camera to begin</div>
+  <div class="dbg" id="dbg"></div>
 
   <div class="row">
     <button class="primary" id="startBtn">Start Camera</button>
@@ -108,8 +111,10 @@
     flash("ok","Admitted  +1  ("+count+")"); }
 
   function onScan(text){
+    text=(text||"").trim();
+    document.getElementById("dbg").textContent = text ? ("read: "+text) : "";
     if(locked) return;
-    if((text||"").trim()===EVENT_CODE){
+    if(text===EVENT_CODE){
       locked=true; admit(); setTimeout(function(){locked=false;},2200);
     } else {
       if(flashEl._bad) return;
@@ -119,13 +124,16 @@
   }
 
   document.getElementById("startBtn").onclick=function(){
+    if(typeof Html5Qrcode==="undefined"){
+      flash("bad","Scanner library didn't load - check internet, reload"); return; }
     if(scanner){ return; }
     if(!audio){ try{ audio=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
     scanner=new Html5Qrcode("reader");
-    scanner.start({facingMode:"environment"},
-      {fps:10, qrbox:{width:240,height:240}},
-      onScan, function(){} )
-      .then(function(){ flash("","Scanning..."); })
+    var cfg={fps:10, qrbox:{width:300,height:210},
+      formatsToSupport:[Html5QrcodeSupportedFormats.QR_CODE,
+                        Html5QrcodeSupportedFormats.CODE_128]};
+    scanner.start({facingMode:"environment"}, cfg, onScan, function(){})
+      .then(function(){ flash("","Scanning - aim at the QR square"); })
       .catch(function(err){
         scanner=null;
         flash("bad","Camera blocked - allow access, use Safari, over https");
