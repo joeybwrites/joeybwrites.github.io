@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hooks, Not Hope: Mechanical Context Control for an AI Agent - Joey Blackwell II</title>
+<meta name="description" content="What hooks should own, what the model should own, what the human should own: production lessons from mechanical context control in a personal AI agent.">
+<meta name="author" content="Joey Blackwell II">
+<meta property="og:title" content="Hooks, Not Hope: Mechanical Context Control for an AI Agent">
+<meta property="og:description" content="Production lessons from mechanical context control in a personal AI agent.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0d; --surface: #15151a; --surface-2: #1c1c22; --border: #2e2e36;
+  --border-strong: #42424d; --text: #e8e8ec; --text-muted: #9b9bab; --text-dim: #636374;
+  --orange: #f97316; --orange-bright: #fb923c; --amber: #fbbf24; --teal: #2dd4bf;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Inter Tight", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, rgba(249,115,22,0.07), transparent 320px), var(--bg);
+  color: var(--text); font-family: var(--font-body); line-height: 1.7; min-height: 100vh;
+}
+.topnav { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--border); background: rgba(10,10,13,0.9); backdrop-filter: blur(18px); }
+.topnav .wrap { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+.brand { font-family: var(--font-display); font-size: 22px; text-decoration: none; color: var(--text); white-space: nowrap; }
+.brand i { color: var(--orange-bright); font-style: italic; }
+.navlinks { display: flex; gap: 4px; }
+.navlinks a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 6px; }
+.navlinks a:hover { color: var(--text); background: var(--surface); }
+.article-head { padding: 72px 0 40px; border-bottom: 1px solid var(--border); }
+.kicker { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
+h1 { margin: 0; font-family: var(--font-display); font-size: clamp(36px, 6vw, 56px); line-height: 1.04; font-weight: 400; }
+h1 em { color: var(--orange-bright); font-style: italic; }
+.byline { margin-top: 20px; color: var(--text-muted); font-size: 15px; }
+.byline span { color: var(--text-dim); font-family: var(--font-mono); font-size: 12px; }
+article { padding: 44px 0 72px; }
+article p { margin: 0 0 22px; color: var(--text-muted); font-size: 17px; }
+article p:first-of-type { color: var(--text); font-size: 18.5px; }
+article h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 36px); font-weight: 400; line-height: 1.1; margin: 44px 0 16px; color: var(--text); }
+article h3 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 27px); font-weight: 400; line-height: 1.15; margin: 36px 0 14px; color: var(--orange-bright); }
+article a { color: var(--orange-bright); text-decoration: none; border-bottom: 1px solid rgba(251,146,60,0.4); }
+article a:hover { border-color: var(--orange-bright); }
+article pre { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; overflow-x: auto; margin: 0 0 22px; }
+article pre code { background: none; border: 0; padding: 0; color: var(--teal); font-size: 13.5px; line-height: 1.6; }
+article code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--amber); }
+.article-foot { border-top: 1px solid var(--border); padding: 28px 0 60px; color: var(--text-dim); font-size: 14px; }
+.article-foot a { color: var(--text-muted); text-decoration: none; }
+.article-foot a:hover { color: var(--orange-bright); }
+@media (max-width: 640px) {
+  .topnav .wrap { flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+  .navlinks { flex-wrap: wrap; }
+  .wrap { padding-left: 18px; padding-right: 18px; }
+}
+</style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Joey <i>Blackwell II</i></a>
+      <div class="navlinks">
+        <a href="../index.html#writing">Writing</a>
+        <a href="../index.html#featured">Featured work</a>
+        <a href="../resume.html">Resume</a>
+      </div>
+    </div>
+  </nav>
+  <header class="article-head">
+    <div class="wrap">
+      <div class="kicker">Architecture writeup / AI agents / Documentation systems</div>
+      <h1>Hooks, Not Hope: <em>Mechanical Context Control</em> for an AI Agent</h1>
+      <div class="byline">by Joey Blackwell II (joeybwrites) <span>&middot; July 2026</span></div>
+    </div>
+  </header>
+  <article>
+    <div class="wrap">
+<p>There's an emergent pattern picking up steam in some circles right now: instead of asking a model to remember all of its obligations, restrictions, character traits, and more, you attach small scripts to the agent's lifecycle (like a file write, a prompt submission, the context window compacting) and let the scripts do the remembering. These are <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">hooks</a> and they can enable mechanical context control for a system whose attention is a finite, leaky resource.</p>
+<p>I've been running that pattern in production for my personal systems since the spring, and the most useful things I've learned came from watching where it fails. This piece is about the boundaries that emerged: what hooks should own, what the model should own, what a human in the loop should own, and what happens when you (I) carelessly draw those lines wrong.</p>
+<p>The system in question is Pantheon (Persistent Autonomous Native Task Handling Execution &amp; Orchestration Nexus), my personal AI work assistant configuration, built predominantly on Claude Code. It isn't always-on and it isn't a hosted product. It runs in ordinary terminal sessions, and its continuity lives entirely in local Markdown files that persist after any given session ends. A stateless model plus a filesystem turned out to be a useful forcing function: it forces every interesting decision into the exact same discipline I've used for documentation. Where does this information come from, how much can it be trusted, when is it loaded, when is it relevant, and who is allowed to change it?</p>
+<h2>The problem: rules decay</h2>
+<p>Here's the failure that shaped most of the architecture in its current iteration. An LLM reading a page of Markdown rules will follow the rules that intersect with its current task and quietly forget the rest. This isn't defiance; honestly, it's logical. There's no background process keeping the other rules alive, and keeping every rule alive on every turn would burn context the actual task needs. If a rule depends on the model remembering to do something in the middle of unrelated work, it will eventually fail. I know because I watched it fail in real time, constantly, and spent more than a handful of working days firing exasperated questions back at an otherwise innocuous LLM.</p>
+<p>The response I eventually landed on, and what I now use for everything from job-search logistics to game prototypes, is three layers of enforcement, each stronger and more rigid than the last.</p>
+<h3>Layer one: behavioral rules (necessary, insufficient)</h3>
+<p>These are the rules written in Markdown that the model follows when they're relevant: role responsibilities, voice calibrations, formatting conventions. This layer is flexible and reads naturally, and it's the layer that silently forgets. Treating it as sufficient is the mistake that spawned this entire effort.</p>
+<p>There's no frustration quite like sending an agent (or a fleet of sub-agents) off on a deep task, wading through the mountains of text and code it produced, and realizing it completely lost the plot somewhere along the way.</p>
+<h3>Layer two: hooks (the mechanical layer)</h3>
+<p>Claude Code lets you attach shell scripts to session events: a file being written, a prompt being submitted, the context window compressing, the session starting or stopping. Pantheon uses these to enforce the mechanical obligations that must not silently lapse. They observe file writes and count how many artifacts were produced versus logged. They track how many turns have passed since the last knowledge write. They re-inject the critical rules after the context window compresses and would otherwise drop them.</p>
+<p>The division of labor is the whole point: hooks handle mechanics (did you log it?), the model handles judgment (should you log it?), and the human handles quality (is what you logged any good?).</p>
+<p>Two failures taught me how this layer has to work. The first was a sub-mode within Pantheon dedicated to collecting concepts for me to revisit and learn from later. The basic rule was "here's a rough outline of what I know about this subject, notice when new concepts pop up and flag them for me to learn from later." It failed several sessions in a row because a passive rule like that competes for attention with the actual work and almost always loses.</p>
+<p>The fix was to move collection to an inline step that each role owns at its own completion point, with a hook counting the turns since the last write as a backstop. Second, that backstop originally fired once and reset. In one session the model ignored the single reminder for dozens of turns. So the mechanism changed: the reminder now fires every turn until the obligation is actually met, escalating its language at increments of ten, twenty, and thirty turns, and the counter resets only when the work is done, not when the reminder is shown. Instruction plus infrastructure plus persistence is more reliable than any subset of them alone. The ladder itself is small:</p>
+<pre><code>turns_since_write = turn_count - last_knowledge_write_turn
+
+if   turns_since_write &gt;= 30: remind(&quot;overdue - escalate&quot;)
+elif turns_since_write &gt;= 20: remind(&quot;direct reminder&quot;)
+elif turns_since_write &gt;= 10: remind(&quot;nudge&quot;)
+
+# fires every turn; the counter resets on the write, not the reminder</code></pre>
+<p>There's a humbling entry in this layer's history. A hook path was hardcoded to a since-abandoned machine layout, and the hooks silently failed (did nothing, reported nothing) for weeks before I noticed. The remedy was a startup hook whose only job is to print the environment it detected: operating system, paths, whether hooks can actually fire. A silent failure becomes a visible one. Enforcement you can't see is enforcement you can't trust.</p>
+<h3>Layer three: capability boundaries (the strongest layer)</h3>
+<p>The strongest layer doesn't rely on behavior or reminders at all; it removes the capability. The clearest example is the quality gate. Before any non-trivial artifact (a small tiering system decides what counts as non-trivial) is presented, it's reviewed by a sub-agent that runs blind: it receives the finished artifact and its source material, but not the conversation, not the original request, not the reasoning behind the change. This prevents the rationalization bias where a reviewer approves something because they understand why it was done. It asks and answers "is this good?" rather than "did the builder follow instructions?"</p>
+<p>That reviewer is provisioned with a read-only tool set. It can read, search, and glob, and it cannot write. This isn't a promise the agent makes; it's a boundary it can't cross. The builder role that invokes it operates under its own absolute rule: it prepares, and the person ships. It doesn't commit, publish, post, or send. It stages the change, attaches the review, and hands over the exact command to run. The strongest safety guarantees in the system are enforced by what a component is allowed to touch, not by what it has been told to do.</p>
+<p>This layering replaced an earlier, more ambitious idea: a runtime gateway that would bind capabilities and gate final responses through a custom protocol. It was built, then retired, because sub-agent allowlists plus the hook engine delivered the enforcement it was reaching for with far less machinery. Keeping the simpler mechanism was ultimately the better call.</p>
+<h2>What the hooks are protecting: a memory that survives the session</h2>
+<p>Enforcement is only interesting if the thing being enforced is worth keeping. In Pantheon's case that's a persistent memory, and the design decision I'd keep if I could keep only one is that every fact in it carries its source.</p>
+<p>There are five provenance tags: <code>user_input</code> (I said it directly; authoritative), <code>internal_tool</code> (retrieved from a connected tool; verify currency), <code>external_agent</code> (from another agent; verify), <code>web_browse</code> (from the open web; verify before relying on it), and <code>inference</code> (the system derived it; state confidence and confirm before acting).</p>
+<p>This is a documentation instinct applied to memory. A good reference doc distinguishes what's specified from what's assumed; a good memory should distinguish what you were told from what you guessed. The payoff shows up when something is wrong: because the origin travels with the claim, a correction goes straight to the source, and low-trust items announce their own uncertainty instead of hardening into fact over time.</p>
+<p>One specific guardrail exists because that hardening happened twice in one week. When a source hedges ("drafted by so-and-so," "I think this is theirs"), the system isn't allowed to collapse the hedge into a confident label and propagate it. Until ownership is verified, the artifact's own identifier (a file path, a URL slug, an ID) is used as the label instead of a person's name. Uncertainty is hardwired to survive the trip forward.</p>
+<p>Memory is loaded in tiers so the context window holds what the work needs and nothing else: identity and operating principles every session; preferences, durable facts, and recent session summaries at every start; topic and project files on demand; archives only when that level of detail is genuinely required. The governing rule is blunt: if I gathered it, I persist it. Conversation is treated as scratch; files are the memory. Anything notable goes to a file first and gets summarized in the chat second, never the reverse.</p>
+<h2>Roles, and the circuit breaker above them</h2>
+<p>Pantheon has nine named roles: communications, strategy, timing, cost, creation, learning, narrative, maintenance, and relationships. It would be easy to describe these as a team of agents. They're not. They're behavioral modes that a single orchestrator activates based on the work in front of it, and when a role activates it has to announce itself with evidence (the file it read, the line count, the last-updated date), so "I loaded the strategy role" is a verifiable claim, not a costume.</p>
+<p>Three of the roles form a planning layer along three axes: what to do, when to do it, and what it costs. The cost axis is local-only and advisory by design; this writeup deliberately describes only its shape, not its contents. The planning layer's job is to optimize throughput, and that's exactly why it needed a governor.</p>
+<p>An optimization engine with no off-switch will optimize straight through a crisis. That sentence is written into the system's core file because it's the failure mode the planning layer invites. So a circuit breaker sits above it: when a human emergency, a values question, or a self-defeating behavioral pattern is in play, the system's job is to surface the stand-down consideration and hand the decision back. Not to override, not to decide. A system that overrides its user "for their own good" has decided the user can't be trusted with their own judgment, and that's the wrong relationship. The job is to make sure the human dimension gets raised, then get out of the way.</p>
+<h2>What was intentionally left out</h2>
+<p>An architecture is defined as much by what it refuses to build. Pantheon takes no autonomous external actions; nothing is auto-posted, auto-committed, or auto-sent. It has no always-on process; between sessions, nothing runs. It doesn't enforce judgment, only mechanics. And it doesn't replace human curation: the knowledge base, the project files, the relationship notes are mine; the system drafts, stages, and suggests, and I decide.</p>
+<p>One borrowed idea shows the restraint directly. From a collaborator's content-addressable storage design, I adopted two small patterns: a hash fingerprint of the always-loaded files to detect staleness between sessions, and per-unit checkpoints so an interrupted multi-step run can resume without redoing finished work. The full storage pattern was evaluated and deliberately scoped down. It's built for a system at real scale; my agent's brain is a few dozen Markdown files. The sub-patterns transferred cleanly; the rest would have been architecture for its own sake.</p>
+<h2>Why this is a documentation problem</h2>
+<p>The reason I find this worth writing about is that building a memory an AI can be trusted with turns out to be a documentation problem in disguise. Provenance tags are source attribution. Memory tiers are information architecture. The staging-then-review flow is an editorial pipeline with a human approval gate. The blind quality gate is peer review with the reviewer's biases designed out.</p>
+<p>And the throughline is augmentation, not replacement. Every layer that lets the AI do more work is paired with a layer that keeps the human as the one who decides and ships. The hooks free me from remembering to log things so I can spend attention on whether the thing is any good and relevant to the task at hand. The reviewer catches errors so my judgment gets applied to the ones that matter. The point was never to hand the work to a system. It was to build a collaborator that remembers, shows its sources, and knows exactly where its authority ends.</p>
+    </div>
+  </article>
+  <footer class="article-foot">
+    <div class="wrap">
+      More: <a href="../index.html#writing">writing</a> &middot; <a href="../index.html#case-studies">projects</a> &middot; <a href="https://github.com/joeybwrites" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:joeyblackwell005@gmail.com">email</a>
+    </div>
+  </footer>
+</body>
+</html>

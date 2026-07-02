@@ -175,6 +175,37 @@ h1 span { color: var(--orange-bright); font-style: italic; }
   transform: translateY(-1px);
 }
 
+.press-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.press-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.press-row a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: 1px;
+}
+.press-row a:hover,
+.press-row a:focus-visible {
+  color: var(--orange-bright);
+  border-color: var(--orange-bright);
+  outline: none;
+}
+
 .system-panel {
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -288,6 +319,56 @@ h2 {
   max-width: 760px;
   font-size: 16px;
   margin: 0 0 28px;
+}
+
+.featured-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--surface), rgba(28,28,34,0.78));
+  padding: 26px;
+}
+.featured-quotebar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.featured-quotebar a {
+  display: block;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--orange-bright);
+  border-radius: 8px;
+  background: var(--surface-2);
+  padding: 18px;
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.featured-quotebar a:hover,
+.featured-quotebar a:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--orange-bright);
+  box-shadow: 0 10px 28px -8px rgba(251,146,60,0.45);
+  outline: none;
+}
+.featured-source {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange-bright);
+  margin-bottom: 8px;
+}
+.featured-line {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.featured-note {
+  margin: 20px 0 0;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 12px;
 }
 
 .work-grid {
@@ -489,6 +570,7 @@ h2 {
   .hero-grid { grid-template-columns: 1fr; }
   .metric-grid { grid-template-columns: repeat(2, 1fr); }
   .work-grid { grid-template-columns: 1fr 1fr; }
+  .featured-quotebar { grid-template-columns: 1fr; }
   .contact { grid-template-columns: 1fr; }
 }
 
@@ -522,9 +604,10 @@ h2 {
     <div class="wrap">
       <div class="brand">Joey <i>Blackwell II</i></div>
       <div class="navlinks" aria-label="Primary navigation">
-        <a href="#metrics">Proof</a>
+        <a href="#featured">Featured</a>
         <a href="#themes">Themes</a>
         <a href="#experience">Experience</a>
+        <a href="#writing">Writing</a>
         <a href="#contact">Contact</a>
         <a href="./resume.html">Resume</a>
         <a href="https://github.com/joeybwrites" target="_blank" rel="noopener">GitHub</a>
@@ -537,10 +620,18 @@ h2 {
       <div>
         <div class="eyebrow">Documentation systems / Developer platforms / AI docs</div>
         <h1>Developer documentation as <span>infrastructure</span>.</h1>
-        <p class="lede">I build documentation systems for developer platforms: API and SDK references, implementation guides, release workflows, knowledge graphs, evaluation loops, and AI-assisted authoring pipelines. My work sits where technical writing, developer experience, and documentation infrastructure meet.</p>
+        <p class="lede">I build documentation systems for developer platforms: API and SDK references, release workflows, knowledge graphs, retrieval evaluation, and AI-assisted authoring pipelines. My work sits where technical writing, developer experience, and documentation infrastructure meet, and some of it ships inside products you can read about below.</p>
         <div class="hero-actions">
           <a class="button primary" href="./resume.html">View full resume</a>
+          <a class="button" href="#featured">Featured work</a>
           <a class="button" href="#experience">Selected experience</a>
+          <a class="button" href="https://joeybwrites.github.io/wordfall/" target="_blank" rel="noopener">Play WORDFALL</a>
+        </div>
+        <div class="press-row" aria-label="Press coverage">
+          <span class="press-label">Work featured in</span>
+          <a href="https://developers.meta.com/horizon/blog/worlds/jumpstart-world-building-creator-assistant/" target="_blank" rel="noopener">Meta Developer Blog</a>
+          <a href="https://www.uploadvr.com/meta-horizon-worlds-desktop-editor-creator-assistant-a-agent/" target="_blank" rel="noopener">UploadVR</a>
+          <a href="https://roadtovr.com/horizon-worlds-development-ai-features/" target="_blank" rel="noopener">Road to VR</a>
         </div>
       </div>
       <aside class="system-panel" aria-label="Career trace">
@@ -553,14 +644,14 @@ h2 {
             <div class="trace-year">2026</div>
             <div>
               <div class="trace-title">Content AI systems</div>
-              <div class="trace-copy">AI-assisted authoring, procedural diagrams, content validation, developer-chatbot evaluation, and retrieval-evaluation research.</div>
+              <div class="trace-copy">AI-assisted authoring, retrieval evaluation with golden datasets, documentation chatbots, agent tooling with validation hooks, and retrieval-evaluation research (NeurIPS 2026 submission).</div>
             </div>
           </div>
           <div class="trace-row">
             <div class="trace-year">2025</div>
             <div>
               <div class="trace-title">Horizon creator docs lead</div>
-              <div class="trace-copy">38 weekly releases, 100+ feature diffs, a release-note process, GenAI documentation, and a 300+ node knowledge subgraph.</div>
+              <div class="trace-copy">38 weekly releases, 100+ feature diffs, a release-note process, and the 300+ node knowledge graph behind a publicly shipped GenAI assistant.</div>
             </div>
           </div>
           <div class="trace-row">
@@ -584,13 +675,38 @@ h2 {
 
   <div class="metrics" id="metrics">
     <div class="wrap metric-grid">
-      <div class="metric"><div class="metric-value">10+</div><div class="metric-label">Years technical writing</div></div>
+      <div class="metric"><div class="metric-value">11</div><div class="metric-label">Years technical writing</div></div>
       <div class="metric"><div class="metric-value">100%</div><div class="metric-label">Platform SDK API coverage</div></div>
-      <div class="metric"><div class="metric-value">38</div><div class="metric-label">Weekly Horizon releases</div></div>
-      <div class="metric"><div class="metric-value">200+</div><div class="metric-label">Engineer-authored diffs</div></div>
-      <div class="metric"><div class="metric-value">300+</div><div class="metric-label">Knowledge graph nodes</div></div>
+      <div class="metric"><div class="metric-value">596</div><div class="metric-label">Doc-bug backlog cleared, AI-assisted</div></div>
+      <div class="metric"><div class="metric-value">~35x</div><div class="metric-label">Context reduction, measured (docs-systems-lab)</div></div>
+      <div class="metric"><div class="metric-value">300+</div><div class="metric-label">Knowledge graph nodes, shipped agent</div></div>
     </div>
   </div>
+
+  <section id="featured">
+    <div class="wrap">
+      <div class="section-kicker">Featured work</div>
+      <h2>The knowledge graph behind a shipped GenAI agent.</h2>
+      <p class="section-intro">Horizon Worlds ships an in-editor Creator Assistant: a GenAI agent that answers creator questions with context-aware documentation. I initiated the documentation-to-knowledge-graph partnership behind it, established learning objectives as its foundation, and validated the graph of 300+ nodes that powers it.</p>
+      <div class="featured-panel">
+        <div class="featured-quotebar">
+          <a href="https://developers.meta.com/horizon/blog/worlds/jumpstart-world-building-creator-assistant/" target="_blank" rel="noopener">
+            <span class="featured-source">Meta Developer Blog</span>
+            <span class="featured-line">The launch announcement: jumpstarting world building with the Creator Assistant.</span>
+          </a>
+          <a href="https://www.uploadvr.com/meta-horizon-worlds-desktop-editor-creator-assistant-a-agent/" target="_blank" rel="noopener">
+            <span class="featured-source">UploadVR</span>
+            <span class="featured-line">Independent coverage of the Desktop Editor's Creator Assistant AI agent.</span>
+          </a>
+          <a href="https://roadtovr.com/horizon-worlds-development-ai-features/" target="_blank" rel="noopener">
+            <span class="featured-source">Road to VR</span>
+            <span class="featured-line">Independent coverage of Horizon Worlds' AI development features.</span>
+          </a>
+        </div>
+        <p class="featured-note">Documentation work that ships inside a product, gets announced, and gets covered: that is the bar this portfolio is built around.</p>
+      </div>
+    </div>
+  </section>
 
   <section id="themes">
     <div class="wrap">
@@ -646,12 +762,13 @@ h2 {
             <div class="role-title">Content AI, Reality Labs</div>
           </div>
           <div class="role-body">
-            <h3>AI-assisted authoring, quality measurement, knowledge graphs.</h3>
+            <h3>AI-assisted authoring, retrieval evaluation, agent tooling.</h3>
             <ul class="bullets">
-              <li><strong>Designed an engine-agnostic interactive diagram system</strong> spanning content extraction, rendering, a custom CMS schema, codegen, accessibility validation, and graph-ready and search-ready JSON intermediates.</li>
-              <li><strong>Contributed to developer-chatbot content validation and evaluation coverage</strong>, including documentation-gap evaluation tied to the procedural diagram work.</li>
-              <li><strong>Co-authored a NeurIPS 2026 submission, under review</strong>, on retrieval-evaluation methodology for LLM tool selection. <a href="https://arxiv.org/abs/2605.24660" target="_blank" rel="noopener" style="color:var(--orange-bright);text-decoration:none;font-weight:600;">Read on arXiv</a></li>
-              <li><strong>Co-developed a PRD-to-doc authoring workflow</strong> that reduced draft creation time and supported two major launches across five engineering teams.</li>
+              <li><strong>Drove retrieval evaluation for a documentation AI stack</strong>: defined query sets and built golden datasets measuring whether AI workflows retrieve the correct documentation pages.</li>
+              <li><strong>Helped define and refine an agentic documentation-repair workflow</strong>: doc bugs became structured fix manifests and agent-drafted batch edits gated by SME review, applied across two engines' doc sets, including a 596-bug backlog fix.</li>
+              <li><strong>Built internal documentation chatbots</strong> over primary doc tracks, with per-chatbot knowledge graphs powering node-based responses and multimedia matched to a user's estimated subject familiarity.</li>
+              <li><strong>Shipped agent tooling schemas, plugins, and hook configurations</strong> for the writing team: deterministic checks validated agent behavior, and turn-interval context re-injection cut token overhead.</li>
+              <li><strong>Co-authored a NeurIPS 2026 submission, under review</strong>, introducing a chance-corrected metric for LLM agent tool retrieval. <a href="https://arxiv.org/abs/2605.24660" target="_blank" rel="noopener" style="color:var(--orange-bright);text-decoration:none;font-weight:600;">Read on arXiv</a></li>
             </ul>
           </div>
         </article>
@@ -667,7 +784,7 @@ h2 {
             <ul class="bullets">
               <li><strong>Led documentation for 38 weekly editor releases</strong> across a fast-moving Horizon release surface.</li>
               <li><strong>Authored 100+ diffs for critical Horizon features</strong>, including NPC and GenAI tooling, creator workflows, conversion guides, and 42+ targeted tutorial updates.</li>
-              <li><strong>Validated a 300+ node documentation knowledge subgraph</strong> for a Horizon GenAI assistant, aligning learning objectives, documentation, and query coverage.</li>
+              <li><strong>Validated the 300+ node documentation knowledge graph</strong> behind the shipped Creator Assistant (see <a href="#featured" style="color:var(--orange-bright);text-decoration:none;">Featured work</a>), aligning learning objectives, documentation, and query coverage.</li>
               <li><strong>Led contingent writers through GA and feature workstreams</strong>, including scoping, onboarding, review, and parallel delivery coordination.</li>
             </ul>
             <p style="margin-top:14px;"><a href="https://developers.meta.com/horizon-worlds/learn/" style="color:var(--orange-bright);text-decoration:none;font-weight:600;font-size:14px;">View the Horizon Worlds creator docs</a></p>
@@ -699,36 +816,54 @@ h2 {
 
   <section id="case-studies">
     <div class="wrap">
-      <div class="section-kicker">Case study teasers</div>
-      <h2>Selected systems work.</h2>
-      <p class="section-intro">Four bodies of work that show the move from writing documentation to building the systems that produce and validate it.</p>
+      <div class="section-kicker">Projects</div>
+      <h2>Systems you can read, run, and play.</h2>
+      <p class="section-intro">Public work that shows the move from writing documentation to building the systems that produce, validate, and measure it. Everything here is live: code you can run, results you can reproduce, a game you can play.</p>
       <div class="teasers">
+        <a class="teaser" href="https://github.com/joeybwrites/docs-systems-lab" target="_blank" rel="noopener">
+          <h3>Docs Systems Lab</h3>
+          <p>Measured documentation-systems experiments. The routing-efficacy slice demonstrates ~35x context reduction at equal answer quality on a real 142-page corpus: retrieval evaluation with query sets, gold pages, and deterministic rubrics.</p>
+        </a>
+        <a class="teaser" href="./writing/hooks-not-hope.html">
+          <h3>Pantheon: mechanical context control</h3>
+          <p>A personal AI assistant with file-based memory, provenance-tagged facts, and hook-enforced obligations. The architecture writeup covers what hooks should own, what the model should own, and the failures that drew those lines.</p>
+        </a>
+        <a class="teaser" href="https://joeybwrites.github.io/wordfall" target="_blank" rel="noopener">
+          <h3>WORDFALL (playable)</h3>
+          <p>A TypeScript/Canvas typing game, live on this site. Built end-to-end: game loop, excerpt mode with a ghost-line passage mechanic, pause system, and a GitHub Actions deploy. Play it in your browser.</p>
+        </a>
         <a class="teaser" href="https://developers.meta.com/horizon/" target="_blank" rel="noopener">
           <h3>Platform SDK API reference coverage</h3>
-          <p>Reaching full API reference coverage across three engines through a gold-standard template, structured update workflow, and engineer contribution model.</p>
-        </a>
-        <a class="teaser" href="https://github.com/joeybwrites/docs-systems-lab" target="_blank" rel="noopener">
-          <h3>Content AI documentation systems</h3>
-          <p>AI-assisted authoring, quality measurement, and procedural diagram infrastructure that made documentation structured and gradeable.</p>
-        </a>
-        <a class="teaser" href="https://developers.meta.com/horizon-worlds/release-notes/" target="_blank" rel="noopener">
-          <h3>Horizon release documentation</h3>
-          <p>A release-note process and knowledge subgraph supporting a high-cadence creator platform through GA and weekly releases.</p>
-        </a>
-        <a class="teaser" href="https://github.com/joeybwrites" target="_blank" rel="noopener">
-          <h3>Pantheon: agent workflow architecture</h3>
-          <p>A personal context-engineering project: file-based memory, behavioral roles, and mechanical enforcement gates for reliable long-running AI workflows.</p>
+          <p>Full API reference coverage across three engines through a gold-standard template, structured update workflow, and a contribution model that enabled 200+ engineer-authored diffs.</p>
         </a>
       </div>
       <p class="teaser-note">Runnable code and examples: <a href="https://github.com/joeybwrites/docs-systems-lab" style="color:var(--orange-bright);text-decoration:none;">Docs Systems Lab on GitHub</a>. Other write-ups available on request.</p>
     </div>
   </section>
 
+  <section id="writing">
+    <div class="wrap">
+      <div class="section-kicker">Writing</div>
+      <h2>Long-form work on documentation and AI systems.</h2>
+      <p class="section-intro">Research and architecture writing, in my own words. The writing is the work: every piece here is grounded in systems I built and results I measured.</p>
+      <div class="teasers">
+        <a class="teaser" href="./writing/hooks-not-hope.html">
+          <h3>Hooks, Not Hope: Mechanical Context Control for an AI Agent</h3>
+          <p>Instead of asking a model to remember its obligations, attach scripts to the agent's lifecycle and let them do the remembering. What hooks should own, what the model should own, what the human should own, and the production failures that drew those boundaries.</p>
+        </a>
+        <a class="teaser" href="https://arxiv.org/abs/2605.24660" target="_blank" rel="noopener">
+          <h3>How Many Tools Should an LLM Agent See? A Chance-Corrected Answer</h3>
+          <p>NeurIPS 2026 (Evaluation &amp; Datasets), under review, co-author. Bits-over-Random as evaluation metric and RL reward for adaptive tool-search depth; matches 50-tool coverage using 7 tools. Read the preprint on arXiv.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="wrap">
       <div class="section-kicker">Contact</div>
-      <h2>Open to senior and principal documentation roles.</h2>
-      <p class="section-intro">Documentation engineering, developer experience, AI documentation infrastructure, and knowledge systems. Remote, or Atlanta-based.</p>
+      <h2>Open to senior documentation and developer-education roles.</h2>
+      <p class="section-intro">Documentation engineering, AI documentation infrastructure, developer education and DevRel, developer experience, and knowledge systems. Remote, or Atlanta-based.</p>
       <div class="contact">
         <div class="contact-card">
           <div class="label">Location</div>
