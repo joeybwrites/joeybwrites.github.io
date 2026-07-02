@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing - Joey Blackwell II</title>
+<meta name="description" content="Writing by Joey Blackwell II on documentation systems, AI agents, retrieval evaluation, and developer platforms.">
+<meta name="author" content="Joey Blackwell II">
+<meta property="og:title" content="Writing - Joey Blackwell II">
+<meta property="og:description" content="Architecture writeups and research on documentation systems and AI agents.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0d; --surface: #15151a; --surface-2: #1c1c22; --border: #2e2e36;
+  --border-strong: #42424d; --text: #e8e8ec; --text-muted: #9b9bab; --text-dim: #636374;
+  --orange: #f97316; --orange-bright: #fb923c; --amber: #fbbf24; --teal: #2dd4bf;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Inter Tight", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, rgba(249,115,22,0.07), transparent 320px), var(--bg);
+  color: var(--text); font-family: var(--font-body); line-height: 1.7; min-height: 100vh;
+}
+.topnav { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--border); background: rgba(10,10,13,0.9); backdrop-filter: blur(18px); }
+.topnav .wrap { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+.brand { font-family: var(--font-display); font-size: 22px; text-decoration: none; color: var(--text); white-space: nowrap; }
+.brand i { color: var(--orange-bright); font-style: italic; }
+.navlinks { display: flex; gap: 4px; }
+.navlinks a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 6px; }
+.navlinks a:hover { color: var(--text); background: var(--surface); }
+.page-head { padding: 72px 0 36px; border-bottom: 1px solid var(--border); }
+.kicker { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
+h1 { margin: 0; font-family: var(--font-display); font-size: clamp(40px, 6vw, 60px); line-height: 1.02; font-weight: 400; }
+.intro { margin: 20px 0 0; color: var(--text-muted); font-size: 17px; max-width: 640px; }
+.list { padding: 20px 0 72px; }
+.entry { display: block; text-decoration: none; color: inherit; border-bottom: 1px solid var(--border); padding: 30px 0; transition: padding-left 0.18s ease; }
+.entry:hover { padding-left: 10px; }
+.entry:hover h2 { color: var(--orange-bright); }
+.entry-meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.entry-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; }
+.entry-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal), transparent 65%); background: color-mix(in srgb, var(--teal), transparent 90%); border-radius: 999px; padding: 3px 10px; }
+.entry-tag.research { color: var(--amber); border-color: color-mix(in srgb, var(--amber), transparent 65%); background: color-mix(in srgb, var(--amber), transparent 90%); }
+.entry-ext { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+.entry h2 { margin: 0 0 8px; font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 32px); font-weight: 400; line-height: 1.12; }
+.entry p { margin: 0; color: var(--text-muted); font-size: 15.5px; }
+.foot { border-top: 1px solid var(--border); padding: 26px 0 60px; color: var(--text-dim); font-size: 14px; }
+.foot a { color: var(--text-muted); text-decoration: none; }
+.foot a:hover { color: var(--orange-bright); }
+@media (max-width: 640px) {
+  .topnav .wrap { flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+  .navlinks { flex-wrap: wrap; }
+  .wrap { padding-left: 18px; padding-right: 18px; }
+}
+</style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Joey <i>Blackwell II</i></a>
+      <div class="navlinks">
+        <a href="../index.html#featured">Featured work</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../resume.html">Resume</a>
+      </div>
+    </div>
+  </nav>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="kicker">Writing</div>
+      <h1>Writing</h1>
+      <p class="intro">Architecture writeups and research on documentation systems, AI agents, retrieval evaluation, and developer platforms. Everything here is grounded in a system I built or a result I measured.</p>
+    </div>
+  </header>
+  <main class="list">
+    <div class="wrap">
+
+      <a class="entry" href="./hooks-not-hope.html">
+        <div class="entry-meta">
+          <span class="entry-date">July 2026</span>
+          <span class="entry-tag">Architecture / AI agents</span>
+        </div>
+        <h2>Hooks, Not Hope: Mechanical Context Control for an AI Agent</h2>
+        <p>Instead of asking a model to remember its obligations, attach scripts to the agent's lifecycle and let them do the remembering. What hooks should own, what the model should own, what the human should own, and the production failures that drew those lines.</p>
+      </a>
+
+      <a class="entry" href="https://arxiv.org/abs/2605.24660" target="_blank" rel="noopener">
+        <div class="entry-meta">
+          <span class="entry-date">2026</span>
+          <span class="entry-tag research">Research</span>
+          <span class="entry-ext">arXiv &#8599;</span>
+        </div>
+        <h2>How Many Tools Should an LLM Agent See? A Chance-Corrected Answer</h2>
+        <p>NeurIPS 2026 (Evaluation &amp; Datasets), under review, co-author. Bits-over-Random as an evaluation metric and RL reward for adaptive tool-search depth: matching 50-tool coverage using 7 tools.</p>
+      </a>
+
+    </div>
+  </main>
+  <footer class="foot">
+    <div class="wrap">
+      <a href="../index.html">&#8592; Back to home</a> &middot; <a href="https://github.com/joeybwrites" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:joeyblackwell005@gmail.com">Email</a>
+    </div>
+  </footer>
+</body>
+</html>
